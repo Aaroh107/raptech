@@ -1,3 +1,4 @@
 - setup ngork account and get the auth token key and domain from there and import that into colab code
 - install all the libraries that i have installed in my 3 python files 
 - then run the main py file directly
+-- this code is only aplicable to answer supplier view right now and you can modify it to answer more views
