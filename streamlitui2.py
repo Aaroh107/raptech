@@ -9,10 +9,10 @@ import requests
 from datetime import datetime
 
 # --- CONFIGURATION ---
-OLLAMA_BASE_URL = "https://moose-relieved-bison.ngrok-free.app"
-OLLAMA_MODEL = "llama3"
+OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3")
 CHAT_HISTORY_DIR = './Intermediate-Chats'
-BACKEND_API_URL = "http://127.0.0.1:8000/query"
+BACKEND_API_URL = os.environ.get("BACKEND_API_URL", "http://127.0.0.1:8000/query")
 
 # --- INITIALIZATION ---
 try:

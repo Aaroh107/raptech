@@ -1,5 +1,7 @@
 # api_backend.py
 
+import os
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import mariadb
@@ -9,16 +11,17 @@ from pydantic import BaseModel
 import re  # Import the regular expressions module
 
 # --- CONFIGURATION ---
-OLLAMA_BASE_URL = "https://moose-relieved-bison.ngrok-free.app"
-OLLAMA_MODEL = "llama3"
+# All connection details come from environment variables (see .env.example).
+OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3")
 DB_CONFIG = {
-    "user": "root",
-    "password": "aaroh107",
-    "host": "127.0.0.1",
-    "port": 3307,
-    "database": "data_db"
+    "user": os.environ.get("DB_USER", "readonly_user"),
+    "password": os.environ["DB_PASSWORD"],
+    "host": os.environ.get("DB_HOST", "127.0.0.1"),
+    "port": int(os.environ.get("DB_PORT", "3306")),
+    "database": os.environ.get("DB_NAME", "data_db")
 }
-DB_VIEW_NAME = "SUPPLIER_VIEW"
+DB_VIEW_NAME = os.environ.get("DB_VIEW_NAME", "SUPPLIER_VIEW")
 
 # --- INITIALIZATION ---
 app = FastAPI(title="Database Query API")
